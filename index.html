@@ -47,7 +47,7 @@
         }
         
         /* Câmpul de Parolă */
-        #password-input {
+        .password-input {
             padding: 10px;
             margin: 20px 0;
             font-size: 1.2em;
@@ -90,7 +90,7 @@
         
         /* Stilul de Dezvăluire Finală (Misiunea 2) */
         .final-mission {
-            background-color: #ffd700; /* Galben-auriu */
+            background-color: #ffd700; 
             color: #4a2a00; 
             font-family: 'Arial', sans-serif;
             transition: background-color 2s ease-in-out, color 2s ease-in-out; 
@@ -104,94 +104,166 @@
              color: #ff8c00;
         }
         .final-mission #final-message {
-            color: #38761d; /* Verde închis */
+            color: #38761d; 
             font-size: 3em;
             font-weight: bold;
             margin-top: 30px;
         }
+
+        /* Ascundem penalizarea inițial */
+        #penalty-view { display: none; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1 id="main-title">DESTINAȚIE NECUNOSCUTĂ - Introdu codul de acces!</h1>
         
-        <input type="text" id="password-input" placeholder="##.##.#### (Ex: 01.01.2025)" maxlength="10">
-        
-        <button id="decrypt-button">DECRIPTEAZĂ</button>
-        
-        <div id="error-message">EROARE CRITICĂ. MAI AI O ÎNCERCARE.</div>
+        <div id="initial-view">
+            <h1 id="main-title">DESTINAȚIE NECUNOSCUTĂ - Introdu codul de acces!</h1>
+            
+            <input type="text" id="date-password-input" class="password-input" placeholder="##.##.#### (Ex: 01.01.2025)" maxlength="10">
+            
+            <button id="decrypt-button">DECRIPTEAZĂ</button>
+            
+            <div id="error-message-date"></div>
+        </div>
 
-        <div id="decoded-mission" style="display:none;">
+        <div id="penalty-view">
+             <h1 id="penalty-title">EROARE CRITICĂ! PENALIZARE ACTIVATĂ!</h1>
+             <p style="color: yellow; font-size: 1.2em;">Greselile se platesc scump! Trebuie sa faci un sacrificiu pentru binele comun. Introdu initialele oamenilor cu care stai la masa acum - ai grija sa fie in ordine alfabetica.</p>
+
+             <input type="text" id="initials-password-input" class="password-input" placeholder="Ex: AB" maxlength="2">
+             <button id="penalty-button">SACRIFICĂ</button>
+             
+             <div id="error-message-initials"></div>
+        </div>
+
+        <div id="success-view" style="display:none;">
             <p style="font-size: 2em; color: #ff9900;">Decriptare totală.</p>
             <button id="next-mission-button">VEZI URMĂTOAREA MISIUNE</button>
         </div>
         
         <div id="final-message" style="display:none;">
-            Teofana, fă-ți bagajul! În februarie mergi în Tailanda!!! 🏝️
+            Teofana, 20.02.2026: Fă-ți bagajul! Mergi în Tailanda!!! 🇹🇭
         </div>
+
     </div>
 
     <script>
-        const CORRECT_PASSWORD = '20.02.2026';
+        // Setări
+        const CORRECT_DATE = '20.02.2026';
+        const CORRECT_INITIALS = 'IO';
         const MAX_ATTEMPTS = 2;
-        let attempts = 0;
 
-        const mainTitle = document.getElementById('main-title');
-        const passwordInput = document.getElementById('password-input');
-        const decryptButton = document.getElementById('decrypt-button');
-        const errorMessage = document.getElementById('error-message');
-        const decodedMission = document.getElementById('decoded-mission');
-        const nextMissionButton = document.getElementById('next-mission-button');
+        // Variabile de stare
+        let dateAttempts = 0;
+        let initialsAttempts = 0;
+        
+        // Elemente DOM
+        const initialView = document.getElementById('initial-view');
+        const penaltyView = document.getElementById('penalty-view');
+        const successView = document.getElementById('success-view');
         const finalMessage = document.getElementById('final-message');
+        const mainTitle = document.getElementById('main-title');
+        
+        const dateInput = document.getElementById('date-password-input');
+        const decryptButton = document.getElementById('decrypt-button');
+        const errorDate = document.getElementById('error-message-date');
 
-        // Logică pentru butonul "Decriptează"
+        const initialsInput = document.getElementById('initials-password-input');
+        const penaltyButton = document.getElementById('penalty-button');
+        const errorInitials = document.getElementById('error-message-initials');
+
+        const nextMissionButton = document.getElementById('next-mission-button');
+
+        // Funcții
+        function showView(viewToShow) {
+            initialView.style.display = 'none';
+            penaltyView.style.display = 'none';
+            successView.style.display = 'none';
+            finalMessage.style.display = 'none';
+            viewToShow.style.display = 'block';
+            
+            // Resetăm mesajele de eroare când schimbăm view-ul
+            errorDate.style.display = 'none';
+            errorInitials.style.display = 'none';
+        }
+
+        function resetInitialView() {
+            showView(initialView);
+            dateAttempts = 0; // Resetăm numărul de greșeli la 0
+            mainTitle.textContent = 'DESTINAȚIE NECUNOSCUTĂ - Introdu codul de acces!';
+            dateInput.value = '';
+            errorDate.textContent = '';
+        }
+
+        // #####################################
+        // LOGICA STĂRII 1: PAROLĂ DATA
+        // #####################################
+
         decryptButton.addEventListener('click', function() {
-            const enteredPassword = passwordInput.value.trim();
+            const enteredPassword = dateInput.value.trim();
 
-            if (enteredPassword === CORRECT_PASSWORD) {
+            if (enteredPassword === CORRECT_DATE) {
                 // Succes
-                document.body.classList.remove('glitch-mode'); 
                 mainTitle.textContent = 'Codul de Acces acceptat.';
-                errorMessage.style.display = 'none';
-                passwordInput.style.display = 'none';
-                decryptButton.style.display = 'none';
-                decodedMission.style.display = 'block';
                 document.querySelector('.container').style.animation = 'none'; // Oprim glitch-ul
+                showView(successView);
                 
             } else {
                 // Eșec
-                attempts++;
+                dateAttempts++;
                 
-                if (attempts === MAX_ATTEMPTS) {
-                    // Cazul "Umanitatea va dispărea"
-                    mainTitle.textContent = 'EROARE FATALĂ! MISIUNE EȘUATĂ!';
-                    errorMessage.textContent = 'EȘEC CRITIC. Misiunea a fost anulată. (Încearcă să o convingi pe Teofana să introducă data corectă!)';
-                    errorMessage.style.display = 'block';
-                    decryptButton.disabled = true;
-                    passwordInput.disabled = true;
-                    document.querySelector('.container').style.borderColor = 'red';
-                    document.querySelector('.container').style.boxShadow = '0 0 30px rgba(255, 0, 0, 0.8)';
-
+                if (dateAttempts >= MAX_ATTEMPTS) {
+                    // Trecem la starea de penalizare
+                    showView(penaltyView);
+                    dateInput.value = '';
+                    mainTitle.textContent = 'MISIUNE EȘUATĂ! Treci la Penalizare!';
+                    document.getElementById('penalty-title').textContent = 'EROARE CRITICĂ! PENALIZARE ACTIVATĂ!';
                 } else {
                     // Cazul "Mai ai o incercare"
                     mainTitle.textContent = 'DECRIPTATOR BLOCAT! Cod greșit!';
-                    errorMessage.style.display = 'block';
-                    passwordInput.value = ''; // Golește câmpul
+                    errorDate.innerHTML = 'EROARE CRITICĂ. Mai ai **o singură** încercare!';
+                    errorDate.style.display = 'block';
+                    dateInput.value = ''; // Golește câmpul
                 }
             }
         });
 
-        // Logică pentru butonul "Vezi următoarea misiune"
+        // #####################################
+        // LOGICA STĂRII 2: PAROLĂ INIȚIALE
+        // #####################################
+        
+        penaltyButton.addEventListener('click', function() {
+            const enteredInitials = initialsInput.value.trim().toUpperCase();
+
+            if (enteredInitials === CORRECT_INITIALS) {
+                // Succesul penalizării (Resetează jocul)
+                alert('Sacrificiu acceptat. Ai câștigat o nouă șansă.');
+                resetInitialView();
+            } else {
+                // Eșecul penalizării (Mesajul "Fratele cel Mare")
+                initialsAttempts++;
+                errorInitials.innerHTML = 'De ce il minți pe **Fratele cel Mare**? Te las totuși să mai introduci codul încă o dată.';
+                errorInitials.style.display = 'block';
+                initialsInput.value = '';
+                
+                // După ce a văzut mesajul, resetăm la starea inițială
+                setTimeout(resetInitialView, 3000); 
+            }
+        });
+
+        // #####################################
+        // LOGICA STĂRII DE SUCCES
+        // #####################################
+
         nextMissionButton.addEventListener('click', function() {
             // Trecem la modul final de surpriză (culori de plajă)
             document.body.classList.add('final-mission');
             
-            // Ascundem elementele inutile
-            decodedMission.style.display = 'none';
+            // Ascundem elementele inutile și afișăm mesajul final
+            successView.style.display = 'none';
             mainTitle.textContent = 'FELICITĂRI! DESTINAȚIA FINALĂ REZOLVATĂ!';
-            
-            // Afișăm mesajul final
             finalMessage.style.display = 'block';
         });
     </script>
