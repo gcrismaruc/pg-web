@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misiunea: Decriptare Cod</title>
+    <title>Misiune: Decriptare Finală</title>
     <style>
-        /* Fundal Negru (Mister) */
+        /* Stilul General - Modul Mister */
         body {
             display: flex;
             flex-direction: column;
@@ -13,25 +13,24 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Courier New', monospace; /* Font de terminal/cod */
-            color: #00ff41; /* Text verde neon, efect de cod */
+            font-family: 'Courier New', monospace;
+            color: #00ff41; 
             text-align: center;
-            background-color: #0d0d0d; /* Aproape negru */
+            background-color: #0d0d0d; 
             transition: background-color 2s ease-in-out, color 2s ease-in-out; 
         }
         
-        /* Container pentru mesajul centrat */
+        /* Containerul */
         .container {
-            background-color: rgba(0, 0, 0, 0.6); 
+            background-color: rgba(0, 0, 0, 0.7); 
             padding: 40px;
             border-radius: 10px;
-            border: 2px solid #00ff41; /* Ramă verde neon */
+            border: 2px solid #00ff41; 
             box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
             max-width: 90%;
-            animation: glitch 1.5s infinite alternate; /* Efect subtil de "glitch" */
+            animation: glitch 1.5s infinite alternate;
         }
 
-        /* Animație subtilă de glitch (terminal) */
         @keyframes glitch {
             0% { transform: translate(0); }
             20% { transform: translate(-1px, 1px); }
@@ -43,80 +42,157 @@
 
         h1 {
             font-size: 2.5em;
-            letter-spacing: 4px;
-            margin-bottom: 30px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+        
+        /* Câmpul de Parolă */
+        #password-input {
+            padding: 10px;
+            margin: 20px 0;
+            font-size: 1.2em;
+            text-align: center;
+            border: 2px solid #00ff41;
+            background-color: #000;
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
         }
 
-        /* Butonul de declanșare */
-        #secret-button {
-            background-color: #ff0041; /* Roșu de urgență */
+        /* Butoane */
+        button {
+            background-color: #ff0041; 
             color: white;
-            border: 2px solid #ff0041;
-            padding: 15px 30px;
-            font-size: 1.2em;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1em;
             cursor: pointer;
             border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: background-color 0.3s ease;
             font-weight: bold;
-            box-shadow: 0 0 10px rgba(255, 0, 65, 0.7);
+            margin-top: 10px;
         }
-
-        #secret-button:hover {
+        button:hover {
             background-color: #cc0033;
-            transform: scale(1.05);
         }
 
-        /* Mesajul Secret (Ascuns inițial) */
-        #secret-message {
-            margin-top: 30px;
-            font-size: 3em;
-            color: #ff9900; /* Portocaliu de surpriză */
-            display: none; 
-            animation: fadeIn 1s ease-in-out;
-            text-shadow: 0 0 15px rgba(255, 153, 0, 0.8);
+        /* Stil pentru Mesajele de Eroare */
+        #error-message {
+            color: red;
+            font-size: 1.5em;
+            margin-top: 20px;
+            display: none;
+            animation: pulse-red 0.5s infinite alternate;
         }
-
-        /* Animație de apariție */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes pulse-red {
+            from { opacity: 0.5; text-shadow: 0 0 5px red; }
+            to { opacity: 1; text-shadow: 0 0 15px red; }
         }
-
-        /* Stilul aplicat la click (Dezvăluirea Surprizei) */
-        .surprise-mode {
-            background-color: #ffd700; /* Galben auriu - Culoare de plajă */
-            color: #4a2a00; /* Text maro închis */
-            font-family: 'Arial', sans-serif; /* Schimbă fontul la dezvăluire */
+        
+        /* Stilul de Dezvăluire Finală (Misiunea 2) */
+        .final-mission {
+            background-color: #ffd700; /* Galben-auriu */
+            color: #4a2a00; 
+            font-family: 'Arial', sans-serif;
+            transition: background-color 2s ease-in-out, color 2s ease-in-out; 
         }
-        .surprise-mode .container {
-            background-color: rgba(255, 255, 255, 0.85);
-            border: 2px solid #ff8c00; /* Ramă portocalie */
+        .final-mission .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ff8c00; 
             box-shadow: 0 0 30px rgba(255, 140, 0, 0.7);
+        }
+        .final-mission h1 {
+             color: #ff8c00;
+        }
+        .final-mission #final-message {
+            color: #38761d; /* Verde închis */
+            font-size: 3em;
+            font-weight: bold;
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>[ ACCES RESTRICȚIONAT ] - INTRODU CHEIA DE DECRIPTAT</h1>
-        <button id="secret-button">DECRIPTEAZĂ</button>
-        <div id="secret-message">Teofana, tu vei merge în Tailanda de ziua ta!!! 🇹🇭</div>
+        <h1 id="main-title">DESTINAȚIE NECUNOSCUTĂ - Introdu codul de acces!</h1>
+        
+        <input type="text" id="password-input" placeholder="##.##.#### (Ex: 01.01.2025)" maxlength="10">
+        
+        <button id="decrypt-button">DECRIPTEAZĂ</button>
+        
+        <div id="error-message">EROARE CRITICĂ. MAI AI O ÎNCERCARE.</div>
+
+        <div id="decoded-mission" style="display:none;">
+            <p style="font-size: 2em; color: #ff9900;">Decriptare totală.</p>
+            <button id="next-mission-button">VEZI URMĂTOAREA MISIUNE</button>
+        </div>
+        
+        <div id="final-message" style="display:none;">
+            Teofana, 20.02.2026: Fă-ți bagajul! Mergi în Tailanda!!! 🏝️
+        </div>
     </div>
 
     <script>
-        document.getElementById('secret-button').addEventListener('click', function() {
-            // 1. Dezvăluie mesajul
-            document.getElementById('secret-message').style.display = 'block';
-            
-            // 2. Schimbă complet stilul paginii la "Surpriză"
-            document.body.classList.add('surprise-mode');
+        const CORRECT_PASSWORD = '20.02.2026';
+        const MAX_ATTEMPTS = 2;
+        let attempts = 0;
 
-            // 3. Schimbă textul butonului și dezactivează-l
-            this.textContent = 'MISIUNE ÎNDEPLINITĂ!';
-            this.disabled = true;
+        const mainTitle = document.getElementById('main-title');
+        const passwordInput = document.getElementById('password-input');
+        const decryptButton = document.getElementById('decrypt-button');
+        const errorMessage = document.getElementById('error-message');
+        const decodedMission = document.getElementById('decoded-mission');
+        const nextMissionButton = document.getElementById('next-mission-button');
+        const finalMessage = document.getElementById('final-message');
+
+        // Logică pentru butonul "Decriptează"
+        decryptButton.addEventListener('click', function() {
+            const enteredPassword = passwordInput.value.trim();
+
+            if (enteredPassword === CORRECT_PASSWORD) {
+                // Succes
+                document.body.classList.remove('glitch-mode'); 
+                mainTitle.textContent = 'Codul de Acces acceptat.';
+                errorMessage.style.display = 'none';
+                passwordInput.style.display = 'none';
+                decryptButton.style.display = 'none';
+                decodedMission.style.display = 'block';
+                document.querySelector('.container').style.animation = 'none'; // Oprim glitch-ul
+                
+            } else {
+                // Eșec
+                attempts++;
+                
+                if (attempts === MAX_ATTEMPTS) {
+                    // Cazul "Umanitatea va dispărea"
+                    mainTitle.textContent = 'EROARE FATALĂ! MISIUNE EȘUATĂ!';
+                    errorMessage.textContent = 'EȘEC CRITIC. Misiunea a fost anulată. (Încearcă să o convingi pe Teofana să introducă data corectă!)';
+                    errorMessage.style.display = 'block';
+                    decryptButton.disabled = true;
+                    passwordInput.disabled = true;
+                    document.querySelector('.container').style.borderColor = 'red';
+                    document.querySelector('.container').style.boxShadow = '0 0 30px rgba(255, 0, 0, 0.8)';
+
+                } else {
+                    // Cazul "Mai ai o incercare"
+                    mainTitle.textContent = 'DECRIPTATOR BLOCAT! Cod greșit!';
+                    errorMessage.style.display = 'block';
+                    passwordInput.value = ''; // Golește câmpul
+                }
+            }
+        });
+
+        // Logică pentru butonul "Vezi următoarea misiune"
+        nextMissionButton.addEventListener('click', function() {
+            // Trecem la modul final de surpriză (culori de plajă)
+            document.body.classList.add('final-mission');
             
-            // 4. Modifică mesajul principal
-            document.querySelector('.container h1').innerHTML = 'DESTINAȚIA FINALĂ REZOLVATĂ!';
+            // Ascundem elementele inutile
+            decodedMission.style.display = 'none';
+            mainTitle.textContent = 'FELICITĂRI! DESTINAȚIA FINALĂ REZOLVATĂ!';
+            
+            // Afișăm mesajul final
+            finalMessage.style.display = 'block';
         });
     </script>
 
