@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misiunea: Destinație Secretă</title>
+    <title>Misiunea: Decriptare Cod</title>
     <style>
-        /* Fundal cu imagine (poți înlocui link-ul de mai jos cu orice imagine din Thailanda găsită pe net) */
+        /* Fundal Negru (Mister) */
         body {
             display: flex;
             flex-direction: column;
@@ -13,49 +13,65 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Georgia', serif;
-            color: white;
+            font-family: 'Courier New', monospace; /* Font de terminal/cod */
+            color: #00ff41; /* Text verde neon, efect de cod */
             text-align: center;
-            background-image: url('https://images.unsplash.com/photo-15420371048574-d07b5d134f71?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* O hartă veche sau un cer înstelat */
-            background-size: cover;
-            background-position: center;
-            transition: background-image 2s ease-in-out; /* Tranziție lină la schimbarea fundalului */
+            background-color: #0d0d0d; /* Aproape negru */
+            transition: background-color 2s ease-in-out, color 2s ease-in-out; 
         }
         
+        /* Container pentru mesajul centrat */
         .container {
-            background-color: rgba(0, 0, 0, 0.7); /* Fundal semi-transparent pentru lizibilitate */
+            background-color: rgba(0, 0, 0, 0.6); 
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            border: 2px solid #00ff41; /* Ramă verde neon */
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+            max-width: 90%;
+            animation: glitch 1.5s infinite alternate; /* Efect subtil de "glitch" */
+        }
+
+        /* Animație subtilă de glitch (terminal) */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(-1px, -1px); }
+            60% { transform: translate(1px, 1px); }
+            80% { transform: translate(1px, -1px); }
+            100% { transform: translate(0); }
         }
 
         h1 {
             font-size: 2.5em;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
             margin-bottom: 30px;
         }
 
+        /* Butonul de declanșare */
         #secret-button {
-            background-color: #ffcc00; /* Galben auriu, pentru un buton care atrage atenția */
-            color: #000000;
-            border: none;
+            background-color: #ff0041; /* Roșu de urgență */
+            color: white;
+            border: 2px solid #ff0041;
             padding: 15px 30px;
             font-size: 1.2em;
             cursor: pointer;
             border-radius: 5px;
             transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(255, 0, 65, 0.7);
         }
 
         #secret-button:hover {
-            background-color: #e6b800;
+            background-color: #cc0033;
             transform: scale(1.05);
         }
 
+        /* Mesajul Secret (Ascuns inițial) */
         #secret-message {
             margin-top: 30px;
             font-size: 3em;
-            color: #ff9900; /* Portocaliu vibrant */
-            display: none; /* Ascundem mesajul inițial */
+            color: #ff9900; /* Portocaliu de surpriză */
+            display: none; 
             animation: fadeIn 1s ease-in-out;
             text-shadow: 0 0 15px rgba(255, 153, 0, 0.8);
         }
@@ -65,14 +81,26 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Stilul aplicat la click (Dezvăluirea Surprizei) */
+        .surprise-mode {
+            background-color: #ffd700; /* Galben auriu - Culoare de plajă */
+            color: #4a2a00; /* Text maro închis */
+            font-family: 'Arial', sans-serif; /* Schimbă fontul la dezvăluire */
+        }
+        .surprise-mode .container {
+            background-color: rgba(255, 255, 255, 0.85);
+            border: 2px solid #ff8c00; /* Ramă portocalie */
+            box-shadow: 0 0 30px rgba(255, 140, 0, 0.7);
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Coordonate Necunoscute... Descoperă Destinația!</h1>
-        <button id="secret-button">APASĂ PENTRU A DECRIPTAT MESAJEUL</button>
-        <div id="secret-message">Teofana, tu vei merge în Tailanda de ziua ta!!! 🏝️</div>
+        <h1>[ ACCES RESTRICȚIONAT ] - INTRODU CHEIA DE DECRIPTAT</h1>
+        <button id="secret-button">DECRIPTEAZĂ</button>
+        <div id="secret-message">Teofana, tu vei merge în Tailanda de ziua ta!!! 🇹🇭</div>
     </div>
 
     <script>
@@ -80,13 +108,15 @@
             // 1. Dezvăluie mesajul
             document.getElementById('secret-message').style.display = 'block';
             
-            // 2. Schimbă textul butonului și dezactivează-l
+            // 2. Schimbă complet stilul paginii la "Surpriză"
+            document.body.classList.add('surprise-mode');
+
+            // 3. Schimbă textul butonului și dezactivează-l
             this.textContent = 'MISIUNE ÎNDEPLINITĂ!';
             this.disabled = true;
-
-            // 3. Schimbă fundalul cu o imagine din Thailanda pentru surpriză vizuală
-            document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1518548419684-2a13f019f6cc?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')";
-            document.body.style.color = 'white';
+            
+            // 4. Modifică mesajul principal
+            document.querySelector('.container h1').innerHTML = 'DESTINAȚIA FINALĂ REZOLVATĂ!';
         });
     </script>
 
