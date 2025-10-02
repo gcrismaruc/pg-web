@@ -1186,7 +1186,10 @@
 
 <body>
 
-
+    <!-- Background Music -->
+    <audio autoplay loop>
+        <source src="mi.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="container">
 
@@ -1347,6 +1350,28 @@
 
 
     <script>
+
+        // Background music autoplay handler
+        const audio = document.querySelector('audio');
+        
+        // Try to play audio immediately
+        if (audio) {
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    // Autoplay was prevented, enable audio on first user interaction
+                    console.log('Autoplay prevented, waiting for user interaction');
+                    const enableAudio = () => {
+                        audio.play();
+                        document.removeEventListener('click', enableAudio);
+                        document.removeEventListener('keydown', enableAudio);
+                    };
+                    document.addEventListener('click', enableAudio, { once: true });
+                    document.addEventListener('keydown', enableAudio, { once: true });
+                });
+            }
+        }
 
         // Setări
 
