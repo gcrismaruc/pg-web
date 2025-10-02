@@ -28,6 +28,8 @@
 
             margin: 0;
 
+            padding: 0;
+
             font-family: 'Courier New', monospace;
 
             color: #00ff41; 
@@ -39,6 +41,10 @@
             transition: background-color 2s ease-in-out, color 2s ease-in-out;
 
             position: relative;
+
+            overflow-x: hidden;
+
+            box-sizing: border-box;
 
         }
 
@@ -59,6 +65,10 @@
             box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
 
             max-width: 90%;
+
+            width: 100%;
+
+            box-sizing: border-box;
 
             animation: glitch 1.5s infinite alternate;
 
@@ -245,6 +255,76 @@
             animation: headerGlow 3s ease-in-out infinite alternate;
         }
         
+        /* Accordion Mission Sections */
+        .mission-accordion {
+            margin: 20px 0;
+        }
+        
+        .mission-accordion-item {
+            margin-bottom: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mission-accordion-header {
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        
+        .mission-accordion-header:hover {
+            background: linear-gradient(135deg, #ff9500, #ffb300);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+        }
+        
+        .mission-accordion-header.active {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+        }
+        
+        .mission-accordion-icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .mission-accordion-arrow {
+            margin-left: auto;
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        
+        .mission-accordion-header.active .mission-accordion-arrow {
+            transform: rotate(90deg);
+        }
+        
+        .mission-accordion-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border-top: none;
+        }
+        
+        .mission-accordion-content.active {
+            padding: 20px;
+            max-height: 300px;
+        }
+        
+        .mission-accordion-content-inner {
+            color: #2c3e50;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+        
         .mission-header::before {
             content: '';
             position: absolute;
@@ -345,7 +425,100 @@
 
         #penalty-view { display: none; }
         
-        /* Author Bubbles System */
+        /* Friends Button */
+        .friends-button {
+            background: linear-gradient(45deg, #ff8c00, #ffd700);
+            color: #4a2a00;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        .friends-button:hover {
+            background: linear-gradient(45deg, #ffd700, #ffeb3b);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+        }
+        
+        /* Authors Dropdown */
+        .authors-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .authors-dropdown.active {
+            display: block;
+        }
+        
+
+        
+        .authors-dropdown-content {
+            min-width: 300px;
+            max-width: 400px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 248, 220, 0.95));
+            border-radius: 15px;
+            border: 2px solid #ff8c00;
+            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .authors-dropdown-header {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-align: center;
+            border-radius: 13px 13px 0 0;
+        }
+        
+        .authors-list {
+            padding: 15px 10px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .author-item {
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+            color: white;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 20px;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            font-size: 0.85em;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 3px 10px rgba(255, 140, 0, 0.3);
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .author-item:hover {
+            background: linear-gradient(135deg, #ff9500, #ffb300);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.5);
+        }
+        
+        .author-item:active {
+            transform: translateY(0);
+        }
+        
+        /* Author Bubbles System - for floating messages */
         .author-bubbles-container {
             position: fixed;
             top: 0;
@@ -353,7 +526,7 @@
             width: 100vw;
             height: 100vh;
             pointer-events: none;
-            z-index: 1000;
+            z-index: 500;
             display: none;
         }
         
@@ -710,6 +883,256 @@
             transform: scale(0.95);
 
         }
+        
+        /* ================================= */
+        /* MOBILE RESPONSIVE DESIGN */
+        /* ================================= */
+        
+        /* Mobile phones (portrait) */
+        @media screen and (max-width: 480px) {
+            body {
+                padding: 10px;
+                min-height: 100vh;
+                overflow-x: hidden;
+            }
+            
+            .final-mission body {
+                min-height: auto;
+                height: auto;
+                overflow-y: auto;
+            }
+            
+            .container {
+                padding: 20px;
+                max-width: 95%;
+                margin: 10px auto;
+            }
+            
+            h1 {
+                font-size: 1.4em !important;
+                letter-spacing: 1px;
+                margin-bottom: 15px;
+                line-height: 1.3;
+            }
+            
+            .password-input {
+                width: calc(100% - 24px);
+                font-size: 1em;
+                padding: 12px;
+                margin: 15px 0;
+                box-sizing: border-box;
+            }
+            
+            button {
+                width: 100%;
+                padding: 12px 15px;
+                font-size: 1em;
+                margin-top: 15px;
+                touch-action: manipulation;
+            }
+            
+            /* Final Mission Mobile Styles */
+            .final-mission #final-message {
+                max-width: 95%;
+                margin: 10px auto 120px auto; /* Extra bottom margin for bubbles */
+                padding: 20px;
+                font-size: 0.9em;
+                overflow: visible;
+            }
+            
+            .mission-header {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .mission-header h2 {
+                font-size: 1.3em !important;
+                line-height: 1.3;
+            }
+            
+            .mission-section {
+                margin-bottom: 15px;
+                padding: 15px;
+            }
+            
+            .mission-title {
+                font-size: 0.9em;
+                margin-bottom: 8px;
+            }
+            
+            .mission-content {
+                font-size: 0.85em;
+                line-height: 1.5;
+            }
+            
+            .final-conclusion {
+                font-size: 0.9em;
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .final-conclusion span {
+                font-size: 1.1em !important;
+            }
+            
+            /* Mobile Accordion Sections */
+            .mission-accordion-header {
+                padding: 12px 15px;
+                font-size: 0.95em;
+            }
+            
+            .mission-accordion-content.active {
+                padding: 15px;
+                max-height: 250px;
+            }
+            
+            .mission-accordion-content-inner {
+                font-size: 0.9em;
+            }
+            
+            /* Mobile Friends Button and Dropdown */
+            .friends-button {
+                font-size: 0.9em;
+                padding: 10px 20px;
+            }
+            
+            .authors-dropdown-content {
+                min-width: 280px;
+                max-width: 320px;
+                position: fixed;
+                top: auto !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                bottom: 100px;
+                margin-top: 0;
+            }
+            
+            .authors-dropdown-header {
+                padding: 12px 15px;
+                font-size: 0.95em;
+            }
+            
+            .authors-list {
+                padding: 10px 8px;
+                max-height: 250px;
+            }
+            
+            .author-item {
+                padding: 8px 12px;
+                margin: 6px 0;
+                font-size: 0.8em;
+            }
+            
+            .floating-message {
+                font-size: 0.85em !important;
+                padding: 12px !important;
+                max-width: 85% !important;
+                margin: 5px !important;
+            }
+            
+            /* Error messages */
+            #error-message-date, #error-message-initials {
+                font-size: 1.1em;
+                margin: 10px 0;
+            }
+        }
+        
+        /* Mobile phones (landscape) and small tablets */
+        @media screen and (max-width: 768px) and (min-width: 481px) {
+            .container {
+                padding: 30px;
+                max-width: 90%;
+            }
+            
+            h1 {
+                font-size: 2em;
+                letter-spacing: 2px;
+            }
+            
+            .password-input {
+                width: 100%;
+                font-size: 1.1em;
+                box-sizing: border-box;
+            }
+            
+            button {
+                font-size: 1em;
+                padding: 11px 18px;
+            }
+            
+            .final-mission #final-message {
+                max-width: 85%;
+                padding: 25px;
+            }
+            
+            .mission-header h2 {
+                font-size: 1.5em !important;
+            }
+            
+            .mission-section {
+                padding: 18px;
+            }
+            
+            .author-bubble {
+                font-size: 0.85em;
+                padding: 9px 18px;
+            }
+        }
+        
+        /* Touch-friendly improvements for all mobile devices */
+        @media screen and (max-width: 768px) {
+            /* Larger touch targets */
+            button {
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+            
+            .author-bubble {
+                min-height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                touch-action: manipulation;
+            }
+            
+            /* Prevent zoom on input focus */
+            .password-input {
+                font-size: 16px !important;
+            }
+            
+            /* Better spacing for readability */
+            .final-mission #final-message {
+                line-height: 1.6;
+            }
+            
+            /* Ensure content doesn't get cut off */
+            body {
+                overflow-x: hidden;
+            }
+            
+            .final-mission {
+                justify-content: flex-start !important;
+                align-items: stretch !important;
+                padding-top: 20px;
+            }
+            
+            .final-mission .container {
+                margin-top: 0;
+                max-height: none;
+                height: auto;
+            }
+            
+            .container {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            /* Mobile instruction text */
+            .final-mission #final-message p:last-child {
+                margin-bottom: 30px;
+                padding-bottom: 10px;
+            }
+        }
 
     </style>
 
@@ -785,33 +1208,45 @@
                 <strong>Teofana</strong>, la aniversarea ta de <strong style="color: #e67e22;">33 de ani</strong>, ai fost selectată pentru o misiune de <strong style="color: #ff0041;">maximă importanță!</strong>
             </div>
             
-            <div class="mission-section">
-                <div class="mission-title">
-                    <span class="mission-icon">🎯</span>
-                    OBIECTIVUL:
+            <!-- Mission Accordion -->
+            <div class="mission-accordion">
+                <div class="mission-accordion-item">
+                    <div class="mission-accordion-header" onclick="toggleAccordion(0)">
+                        <span class="mission-accordion-icon">🎯</span>
+                        <span>OBIECTIVUL</span>
+                        <span class="mission-accordion-arrow">▶</span>
+                    </div>
+                    <div class="mission-accordion-content" id="accordion-0">
+                        <div class="mission-accordion-content-inner">
+                            Infiltrarea în paradisul tropical cunoscut sub numele de <strong style="color: #e67e22;">Thailanda</strong>.
+                        </div>
+                    </div>
                 </div>
-                <div class="mission-content">
-                    Infiltrarea în paradisul tropical cunoscut sub numele de <strong style="color: #e67e22;">Thailanda</strong>.
+                
+                <div class="mission-accordion-item">
+                    <div class="mission-accordion-header" onclick="toggleAccordion(1)">
+                        <span class="mission-accordion-icon">📋</span>
+                        <span>INSTRUCȚIUNI</span>
+                        <span class="mission-accordion-arrow">▶</span>
+                    </div>
+                    <div class="mission-accordion-content" id="accordion-1">
+                        <div class="mission-accordion-content-inner">
+                            Pregătirile de zbor încep <span class="highlight-text">I-ME-DI-AT!</span> La aterizare, vei primi un cocktail misterios (cel mai probabil un <strong>Mai Tai</strong>), iar singurul echipament obligatoriu este un costum de baie și cremă de protecție solară (factor <strong>SF30+</strong>).
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="mission-section">
-                <div class="mission-title">
-                    <span class="mission-icon">📋</span>
-                    INSTRUCȚIUNI:
-                </div>
-                <div class="mission-content">
-                    Pregătirile de zbor încep <span class="highlight-text">I-ME-DI-AT!</span> La aterizare, vei primi un cocktail misterios (cel mai probabil un <strong>Mai Tai</strong>), iar singurul echipament obligatoriu este un costum de baie și cremă de protecție solară (factor <strong>SF30+</strong>).
-                </div>
-            </div>
-            
-            <div class="mission-section">
-                <div class="mission-title">
-                    <span class="mission-icon">⚠️</span>
-                    ATENȚIE:
-                </div>
-                <div class="mission-content" style="color: #e74c3c; font-weight: bold;">
-                    Eșecul de a te bucura de plaje, mâncare și masaj este <strong>INACCEPTABIL</strong>.
+                
+                <div class="mission-accordion-item">
+                    <div class="mission-accordion-header" onclick="toggleAccordion(2)">
+                        <span class="mission-accordion-icon">⚠️</span>
+                        <span>ATENȚIE</span>
+                        <span class="mission-accordion-arrow">▶</span>
+                    </div>
+                    <div class="mission-accordion-content" id="accordion-2">
+                        <div class="mission-accordion-content-inner" style="color: #e74c3c; font-weight: bold;">
+                            Eșecul de a te bucura de plaje, mâncare și masaj este <strong>INACCEPTABIL</strong>.
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -821,9 +1256,24 @@
                 <span style="color: #ffeb3b; font-size: 1.4em;">Misiune plăcută, 033!</span> 🇹🇭
             </div>
             
-            <p style="color: #e67e22; font-size: 1.2em; margin: 30px 0 10px 0; text-align: center; font-weight: bold;">
-                Click pe numele prietenilor pentru a vedea mesajele lor:
-            </p>
+            <!-- Friends Button -->
+            <div style="margin-top: 25px; position: relative;">
+                <button class="friends-button" onclick="toggleAuthorsDropdown()">
+                    PRIETENI
+                </button>
+                
+                <!-- Authors Dropdown (positioned relative to button) -->
+                <div class="authors-dropdown" id="authors-dropdown">
+                    <div class="authors-dropdown-content">
+                        <div class="authors-dropdown-header">
+                            Mesaje de la prieteni
+                        </div>
+                        <div class="authors-list" id="authors-list">
+                            <!-- Author items will be generated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
             
         </div>
         
@@ -978,11 +1428,81 @@
 
                 message: "Să știi că, în loc de poze cu cai, aștept poze cu surferi la bustul gol pe plajă, din ăștia care merg în Thailanda să se regăsească pe ei și să-și caute scopul în viață. Și cine știe, poate iti gasesti si tu scopul in brațele unuia. Sau a doi… 😉 Love you always, Mariana"
 
+            },
+
+            {
+
+                author: "Razvan:",
+
+                message: "Teofana, la mulți ani! 🎉 Sper că în Thailanda vei găsi cea mai bună plajă pentru relaxare și cel mai bun street food pentru aventură culinară. Nu uita să încerci Pad Thai autentic și să faci snorkeling - sunt convins că vei avea experiențe de neuitat!"
+
+            },
+
+            {
+
+                author: "Razvan:",
+
+                message: "PS: Dacă ajungi în Bangkok, neapărat vizitează templele și piețele plutitoare. Și dacă te întâlnești cu vreun elefant, să-mi trimiți o poză! Să te bucuri la maximum de această aventură tropicală! 🐘🌴"
+
+            },
+
+            {
+
+                author: "MadaD:",
+
+                message: "Dragă Teofană, la mulți ani și congratulations pentru această super aventură în Thailanda! 🇹🇭 Mă bucur tare mult pentru tine - meriti din plin această experiență incredibilă. Thailand is calling și tu răspunzi cu stil!"
+
+            },
+
+            {
+
+                author: "MadaD:",
+
+                message: "Să te bucuri de fiecare moment: de plajele cu nisip alb, de apusurile spectaculoase, de mâncarea delicioasă și de toate aventurile care te așteaptă. Și nu uita - ce se întâmplă în Thailand... se postează pe Instagram! 📸✨ Să ai parte de cele mai frumoase zile!"
+
             }
 
         ];
 
+        // Accordion functionality
+        function toggleAccordion(index) {
+            const allHeaders = document.querySelectorAll('.mission-accordion-header');
+            const allContents = document.querySelectorAll('.mission-accordion-content');
+            
+            // Close all accordions
+            allHeaders.forEach((header, i) => {
+                header.classList.remove('active');
+                allContents[i].classList.remove('active');
+            });
+            
+            // Open the clicked accordion if it wasn't already open
+            const clickedHeader = allHeaders[index];
+            const clickedContent = allContents[index];
+            
+            if (!clickedContent.classList.contains('active')) {
+                clickedHeader.classList.add('active');
+                clickedContent.classList.add('active');
+            }
+        }
+        
+        // Authors dropdown functionality
+        function toggleAuthorsDropdown() {
+            const dropdown = document.getElementById('authors-dropdown');
+            dropdown.classList.toggle('active');
+        }
 
+        // Click outside to close dropdown
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('authors-dropdown');
+            const friendsButton = document.querySelector('.friends-button');
+            
+            // Check if click is outside the dropdown and button
+            if (dropdown && friendsButton && 
+                !dropdown.contains(event.target) && 
+                !friendsButton.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
 
         // Variabile de stare
 
@@ -1023,6 +1543,43 @@
 
 
         const nextMissionButton = document.getElementById('next-mission-button');
+
+        // Auto-format date input with dots
+        dateInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+            
+            // Add dots automatically
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '.' + value.substring(2);
+            }
+            if (value.length >= 5) {
+                value = value.substring(0, 5) + '.' + value.substring(5, 9);
+            }
+            
+            // Limit to 10 characters (DD.MM.YYYY)
+            if (value.length > 10) {
+                value = value.substring(0, 10);
+            }
+            
+            e.target.value = value;
+        });
+
+        // Allow only numbers and dots for date input
+        dateInput.addEventListener('keydown', function(e) {
+            // Allow: backspace, delete, tab, escape, enter
+            if ([8, 9, 27, 13, 46].indexOf(e.keyCode) !== -1 ||
+                // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+                (e.keyCode === 65 && e.ctrlKey === true) ||
+                (e.keyCode === 67 && e.ctrlKey === true) ||
+                (e.keyCode === 86 && e.ctrlKey === true) ||
+                (e.keyCode === 88 && e.ctrlKey === true)) {
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
 
         // Author bubbles system initialized
 
@@ -1072,11 +1629,6 @@
 
         // Author Bubbles System
         let activeMessages = [];
-        let bubblePositions = [
-            { x: 15, y: 20 }, { x: 85, y: 25 }, { x: 50, y: 15 },
-            { x: 20, y: 70 }, { x: 80, y: 75 }, { x: 45, y: 85 },
-            { x: 10, y: 45 }, { x: 90, y: 50 }
-        ];
         
         // Get unique authors from QUOTES
         function getUniqueAuthors() {
@@ -1084,28 +1636,31 @@
             return authors;
         }
         
-        // Create author bubbles
+        // Create author items in dropdown
         function createAuthorBubbles() {
-            const container = document.getElementById('author-bubbles');
+            const container = document.getElementById('authors-list');
             const authors = getUniqueAuthors();
+            
+            // Clear container first
+            container.innerHTML = '';
             
             authors.forEach((author, index) => {
                 setTimeout(() => {
-                    const bubble = document.createElement('div');
-                    bubble.className = 'author-bubble';
-                    bubble.textContent = author;
-                    bubble.style.animationDelay = `${index * 0.2}s`;
-                    
-                    // Position bubble
-                    const pos = bubblePositions[index % bubblePositions.length];
-                    bubble.style.left = pos.x + '%';
-                    bubble.style.top = pos.y + '%';
+                    const item = document.createElement('button');
+                    item.className = 'author-item';
+                    item.textContent = author;
                     
                     // Add click handler
-                    bubble.addEventListener('click', () => showAuthorMessages(author));
+                    item.addEventListener('click', () => {
+                        showAuthorMessages(author);
+                        // Close dropdown after selection on mobile
+                        if (window.innerWidth <= 768) {
+                            document.getElementById('authors-dropdown').classList.remove('active');
+                        }
+                    });
                     
-                    container.appendChild(bubble);
-                }, index * 200);
+                    container.appendChild(item);
+                }, index * 100);
             });
         }
         
