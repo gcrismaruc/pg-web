@@ -1,335 +1,1429 @@
 <!DOCTYPE html>
+
 <html lang="ro">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misiune: Decriptare Finală</title>
-    <style>
-        /* Stilul General - Modul Mister */
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Courier New', monospace;
-            color: #00ff41; 
-            text-align: center;
-            background-color: #0d0d0d; 
-            transition: background-color 2s ease-in-out, color 2s ease-in-out; 
-        }
-        
-        /* Containerul */
-        .container {
-            background-color: rgba(0, 0, 0, 0.7); 
-            padding: 40px;
-            border-radius: 10px;
-            border: 2px solid #00ff41; 
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
-            max-width: 90%;
-            animation: glitch 1.5s infinite alternate;
-        }
 
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-1px, 1px); }
-            40% { transform: translate(-1px, -1px); }
-            60% { transform: translate(1px, 1px); }
-            80% { transform: translate(1px, -1px); }
-            100% { transform: translate(0); }
-        }
+    <meta charset="UTF-8">
 
-        h1 {
-            font-size: 2.5em;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-        }
-        
-        /* Câmpul de Parolă */
-        .password-input {
-            padding: 10px;
-            margin: 20px 0;
-            font-size: 1.2em;
-            text-align: center;
-            border: 2px solid #00ff41;
-            background-color: #000;
-            color: #00ff41;
-            font-family: 'Courier New', monospace;
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        /* Butoane */
-        button {
-            background-color: #ff0041; 
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1.1em;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #cc0033;
-        }
+    <title>Misiune: Decriptare Finală</title>
 
-        /* Stil pentru Mesajele de Eroare */
-        #error-message-date, #error-message-initials {
-            color: red;
-            font-size: 1.5em;
-            margin-top: 20px;
-            display: none;
-            animation: pulse-red 0.5s infinite alternate;
-        }
-        @keyframes pulse-red {
-            from { opacity: 0.5; text-shadow: 0 0 5px red; }
-            to { opacity: 1; text-shadow: 0 0 15px red; }
-        }
-        
-        /* Stilul de Dezvăluire Finală (Misiunea 2) - Culori de Plajă */
-        .final-mission {
-            background-color: #f7e6a7; /* Nisip deschis */ 
-            color: #38761d; /* Verde închis */ 
-            font-family: 'Arial', sans-serif;
-            transition: background-color 2s ease-in-out, color 2s ease-in-out; 
-        }
-        .final-mission .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border: 2px solid #00bfff; /* Albastru Azur */ 
-            box-shadow: 0 0 30px rgba(0, 191, 255, 0.7);
-            max-width: 800px; /* Lărgim pentru mesaje */
-        }
-        .final-mission h1 {
-            color: #ff8c00; /* Portocaliu de apus */
-        }
-        .final-mission .message-block {
-            border-left: 5px solid #ff8c00;
-            padding: 10px 20px;
-            margin: 20px 0;
-            background-color: rgba(255, 255, 255, 0.6);
-            text-align: left;
-            font-size: 1.1em;
-            color: #4a2a00;
-            font-style: italic;
-        }
-        .final-mission .sender {
-            display: block;
-            text-align: right;
-            font-weight: bold;
-            margin-top: 10px;
-            color: #00bfff;
-            font-style: normal;
-        }
-        .final-mission #final-message h2 {
-            color: #ff8c00;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-        }
+    <style>
+
+        /* Stilul General - Modul Mister */
+
+        body {
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            min-height: 100vh;
+
+            margin: 0;
+
+            font-family: 'Courier New', monospace;
+
+            color: #00ff41; 
+
+            text-align: center;
+
+            background-color: #0d0d0d; 
+
+            transition: background-color 2s ease-in-out, color 2s ease-in-out;
+
+            position: relative;
+
+        }
+
+        
+
+        /* Containerul */
+
+        .container {
+
+            background-color: rgba(0, 0, 0, 0.7); 
+
+            padding: 40px;
+
+            border-radius: 10px;
+
+            border: 2px solid #00ff41; 
+
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+
+            max-width: 90%;
+
+            animation: glitch 1.5s infinite alternate;
+
+        }
 
 
-        /* Ascundem penalizarea inițial */
-        #penalty-view { display: none; }
-    </style>
+
+        @keyframes glitch {
+
+            0% { transform: translate(0); }
+
+            20% { transform: translate(-1px, 1px); }
+
+            40% { transform: translate(-1px, -1px); }
+
+            60% { transform: translate(1px, 1px); }
+
+            80% { transform: translate(1px, -1px); }
+
+            100% { transform: translate(0); }
+
+        }
+
+
+
+        h1 {
+
+            font-size: 2.5em;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 20px;
+
+        }
+
+        
+
+        /* Câmpul de Parolă */
+
+        .password-input {
+
+            padding: 10px;
+
+            margin: 20px 0;
+
+            font-size: 1.2em;
+
+            text-align: center;
+
+            border: 2px solid #00ff41;
+
+            background-color: #000;
+
+            color: #00ff41;
+
+            font-family: 'Courier New', monospace;
+
+        }
+
+
+
+        /* Butoane */
+
+        button {
+
+            background-color: #ff0041; 
+
+            color: white;
+
+            border: none;
+
+            padding: 10px 20px;
+
+            font-size: 1.1em;
+
+            cursor: pointer;
+
+            border-radius: 5px;
+
+            transition: background-color 0.3s ease;
+
+            font-weight: bold;
+
+            margin-top: 10px;
+
+        }
+
+        button:hover {
+
+            background-color: #cc0033;
+
+        }
+
+
+
+        /* Stil pentru Mesajele de Eroare */
+
+        #error-message {
+
+            color: red;
+
+            font-size: 1.5em;
+
+            margin-top: 20px;
+
+            display: none;
+
+            animation: pulse-red 0.5s infinite alternate;
+
+        }
+
+        @keyframes pulse-red {
+
+            from { opacity: 0.5; text-shadow: 0 0 5px red; }
+
+            to { opacity: 1; text-shadow: 0 0 15px red; }
+
+        }
+
+        
+
+        /* Stilul de Dezvăluire Finală (Misiunea 2) */
+
+        .final-mission {
+
+            background-color: #ffd700; 
+
+            color: #4a2a00; 
+
+            font-family: 'Arial', sans-serif;
+
+            transition: background-color 2s ease-in-out, color 2s ease-in-out; 
+
+        }
+
+        .final-mission .container {
+
+            background-color: rgba(255, 255, 255, 0.9);
+
+            border: 2px solid #ff8c00; 
+
+            box-shadow: 0 0 30px rgba(255, 140, 0, 0.7);
+
+        }
+
+        .final-mission h1 {
+
+             color: #ff8c00;
+
+        }
+
+        .final-mission #final-message {
+
+            color: #2c3e50; 
+
+            font-size: 1em;
+
+            font-weight: normal;
+
+            margin-top: 30px;
+            text-align: left;
+            max-width: 850px;
+            margin: 20px auto;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 248, 220, 0.95));
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 3px solid #ff8c00;
+            backdrop-filter: blur(10px);
+
+        }
+        
+        /* Mission Header Styling */
+        .mission-header {
+            background: linear-gradient(135deg, #ff8c00, #ffa500, #ffb347);
+            color: white;
+            padding: 25px;
+            border-radius: 18px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 25px rgba(255, 140, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: headerGlow 3s ease-in-out infinite alternate;
+        }
+        
+        .mission-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+        
+        @keyframes headerGlow {
+            0% { box-shadow: 0 12px 25px rgba(255, 140, 0, 0.4); }
+            100% { box-shadow: 0 12px 35px rgba(255, 140, 0, 0.6); }
+        }
+        
+        /* Mission Section Styling */
+        .mission-section {
+            margin: 22px 0;
+            padding: 18px 25px;
+            border-left: 5px solid #ff8c00;
+            background: linear-gradient(90deg, rgba(255, 140, 0, 0.08), rgba(255, 140, 0, 0.03));
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .mission-section:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.25);
+            background: linear-gradient(90deg, rgba(255, 140, 0, 0.12), rgba(255, 140, 0, 0.05));
+        }
+        
+        .mission-icon {
+            font-size: 1.6em;
+            margin-right: 12px;
+            vertical-align: middle;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        
+        .mission-title {
+            color: #e67e22;
+            font-weight: bold;
+            font-size: 1.25em;
+            display: inline-block;
+            margin-bottom: 10px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .mission-content {
+            color: #2c3e50;
+            line-height: 1.7;
+            font-size: 1.1em;
+        }
+        
+        .highlight-text {
+            background: linear-gradient(45deg, #ff0041, #ff6b6b);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(255, 0, 65, 0.3);
+            animation: highlightPulse 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes highlightPulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        .final-conclusion {
+            background: linear-gradient(135deg, #38761d, #4caf50, #66bb6a);
+            color: white;
+            padding: 25px;
+            border-radius: 18px;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1.3em;
+            font-weight: bold;
+            box-shadow: 0 12px 25px rgba(56, 118, 29, 0.4);
+            animation: conclusionPulse 3s ease-in-out infinite alternate;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes conclusionPulse {
+            0% { transform: scale(1); box-shadow: 0 12px 25px rgba(56, 118, 29, 0.4); }
+            100% { transform: scale(1.02); box-shadow: 0 15px 30px rgba(56, 118, 29, 0.6); }
+        }
+
+
+
+        /* Ascundem penalizarea inițial */
+
+        #penalty-view { display: none; }
+        
+        /* Author Bubbles System */
+        .author-bubbles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .final-mission .author-bubbles-container {
+            display: block;
+        }
+        
+        .author-bubble {
+            position: absolute;
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            font-size: 0.9em;
+            cursor: pointer;
+            pointer-events: auto;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: scale(0.7);
+            animation: bubbleAppear 0.8s ease-out forwards;
+        }
+        
+        .author-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.6);
+            background: linear-gradient(135deg, #ff9500, #ffb300);
+        }
+        
+        .author-bubble:active {
+            transform: scale(0.95);
+        }
+        
+        @keyframes bubbleAppear {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Floating Message Boxes */
+        .floating-message {
+            position: absolute;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 248, 220, 0.9));
+            color: #2c3e50;
+            padding: 18px 22px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            font-family: 'Georgia', serif;
+            font-size: 0.85em;
+            line-height: 1.4;
+            max-width: 300px;
+            min-width: 220px;
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transform: translateY(30px) scale(0.8);
+            animation: messageFloat 1s ease-out forwards, gentleFloat 8s ease-in-out infinite 1s;
+            pointer-events: auto;
+            z-index: 1001;
+        }
+        
+        .floating-message::before {
+            content: '💌';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-size: 1.3em;
+            animation: messageGlow 3s ease-in-out infinite;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        
+        .message-author {
+            font-weight: bold;
+            color: #e67e22;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .message-content {
+            color: #34495e;
+            line-height: 1.5;
+        }
+        
+        @keyframes messageFloat {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(0.5deg); }
+            50% { transform: translateY(-5px) rotate(0deg); }
+            75% { transform: translateY(-10px) rotate(-0.5deg); }
+        }
+        
+        @keyframes messageGlow {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        
+
+        /* Floating Quotes with Wings */
+
+        /* Simple Mobile-First Floating Quotes */
+
+        .quote-overlay {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100vw;
+
+            height: 100vh;
+
+            pointer-events: none;
+
+            z-index: 1000;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-rows: repeat(4, 1fr);
+
+            gap: 10px;
+
+            padding: 20px;
+
+            box-sizing: border-box;
+
+        }
+
+        
+
+        .floating-quote {
+
+            position: relative;
+
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 248, 240, 0.9));
+
+            color: #333;
+
+            padding: 12px 15px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+            font-family: 'Georgia', serif;
+
+            font-size: 0.7em;
+
+            animation: gentleFloat 6s ease-in-out infinite;
+
+            pointer-events: auto;
+
+            border-left: 3px solid #ff8c00;
+
+            max-height: 120px;
+
+            overflow: hidden;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+        }        
+
+        /* Simple wing decorations */
+
+        .floating-quote::before,
+
+        .floating-quote::after {
+
+            content: '🦋';
+
+            position: absolute;
+
+            font-size: 1.2em;
+
+            animation: wingFlutter 3s ease-in-out infinite;
+
+        }
+
+        
+
+        .floating-quote::before {
+
+            left: -15px;
+
+            top: 5px;
+
+            animation-delay: 0s;
+
+        }
+
+        
+
+        .floating-quote::after {
+
+            right: -15px;
+
+            top: 5px;
+
+            animation-delay: 1.5s;
+
+        }
+
+        
+
+        @keyframes wingFlutter {
+
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+
+            50% { transform: scale(1.2) rotate(5deg); opacity: 1; }
+
+        }
+
+        
+
+        .floating-quote .author {
+
+            font-weight: bold;
+
+            color: #ff8c00;
+
+            margin-bottom: 10px;
+
+            font-size: 1.1em;
+
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+            display: flex;
+
+            align-items: center;
+
+        }
+
+        
+
+        .floating-quote .author::before {
+
+            content: '💌';
+
+            margin-right: 8px;
+
+            font-size: 1.2em;
+
+        }
+
+        
+
+        .floating-quote .message {
+
+            line-height: 1.5;
+
+            font-style: italic;
+
+            text-align: left;
+
+            color: #444;
+
+        }
+
+        
+
+        @keyframes float {
+
+            0%, 100% { 
+
+                transform: translateY(0px) rotate(0deg); 
+
+                opacity: 0.8;
+
+            }
+
+            25% { 
+
+                transform: translateY(-20px) rotate(1deg); 
+
+                opacity: 1;
+
+            }
+
+            50% { 
+
+                transform: translateY(-10px) rotate(-0.5deg); 
+
+                opacity: 0.9;
+
+            }
+
+            75% { 
+
+                transform: translateY(-15px) rotate(0.5deg); 
+
+                opacity: 1;
+
+            }
+
+        }
+
+        
+
+        /* Different animation delays and durations for variety */
+
+        .floating-quote:nth-child(odd) {
+
+            animation-duration: 10s;
+
+            animation-delay: 1s;
+
+        }
+
+        
+
+        .floating-quote:nth-child(even) {
+
+            animation-duration: 12s;
+
+            animation-delay: 2s;
+
+        }
+
+        
+
+        /* Button hover effects */
+
+        #more-messages-button:hover {
+
+            background-color: #2d5a1f !important;
+
+            transform: scale(1.05);
+
+            box-shadow: 0 6px 20px rgba(56, 118, 29, 0.5) !important;
+
+        }
+
+        
+
+        #more-messages-button:active {
+
+            transform: scale(0.95);
+
+        }
+
+    </style>
+
 </head>
+
 <body>
 
-    <div class="container">
-        
-        <div id="initial-view">
-            <h1 id="main-title">DESTINAȚIE NECUNOSCUTĂ - Introdu codul de acces!</h1>
-            
-            <input type="text" id="date-password-input" class="password-input" placeholder="##.##.#### (Ex: 01.01.2025)" maxlength="10">
-            
-            <button id="decrypt-button">DECRIPTEAZĂ</button>
-            
-            <div id="error-message-date"></div>
-        </div>
 
-        <div id="penalty-view">
-             <h1 id="penalty-title">EROARE CRITICĂ! PENALIZARE ACTIVATĂ!</h1>
-             <p style="color: yellow; font-size: 1.2em;">Greselile se platesc scump! Trebuie sa faci un sacrificiu pentru binele comun. Introdu initialele oamenilor cu care stai la masa acum - ai grija sa fie in ordine alfabetica.</p>
 
-             <input type="text" id="initials-password-input" class="password-input" placeholder="Ex: AB" maxlength="2">
-             <button id="penalty-button">SACRIFICĂ</button>
-             
-             <div id="error-message-initials"></div>
-        </div>
+    <div class="container">
 
-        <div id="success-view" style="display:none;">
-            <p style="font-size: 2em; color: #ff9900;">Decriptare totală.</p>
-            <button id="next-mission-button">VEZI URMĂTOAREA MISIUNE</button>
-        </div>
-        
-        <div id="final-message" style="display:none;">
-            <h2>TRANS MISIUNEA 2: FIȘIERE RECUPERATE</h2>
-            <p style="font-size: 1.5em; font-weight: bold; color: #ff8c00;">Teofana, fă-ți bagajul! Destinație: Tailanda - Februarie 2026!!! 🇹🇭</p>
-            
-            <hr style="border-color: #ff8c00;">
+        
 
-                        <div class="message-block">
-                "Draga Ciolofana, Iti doresc o calatorie minunata, cu mult spf 50, cu tot ce iti ureaza Andreea and then some. Ai grija sa nu te imbolnavesti si abia astept sa primesc o carte postala de acolo dupa 2 ani de la vizita ta:)) Pupi! Pa!"
-                <span class="sender">-- Dori (Decriptare Nivel 3)</span>
-            </div>
+        <div id="initial-view">
 
-            <div class="message-block">
-                "La multi ani, prietenaaaaa meaaa cea mai bunaaa (trebuia sa precizez pentru ca Oana a strans mesajele, sa nu uite cumva) stttttttimata (si vesnic ocupata) doamna directoare...Thailand is callling...prea devreme sa fac gluma cu iti doresc fu-thai? Sau?! Am decis ca ai nevoie de o vacanta, doar pentru tine, asa ca sa nu mai aud de baby sitting si sedinte si deadline-uri si CEO-ing decat daca e inceputul unui film porno, in care speeeer sa fii protagonista in fiecare seara din aceasta vacanta😏😏😏 Pixie e perfect capabila sa conduca compania, sa negocieze contractele, creca deja a si convocat o sedinta de pe canapea...asa ca umpleee bagajele si enjoy enjoy njoy joy oy yyy aaaa iii aaaaa aaaa uuuu aaaaa si pe plaja in apa pe barca la hotel pe langa hotel si oriunde!!! Acum ca am disperat-o pe Ioana cu toate glumele sexoase (stiu ca Oana ii arata), sa trecem la lucruri serioase: te iubesc din clasa 1 (bine am exagerat, da voiam sa le aduc aminte si asta) iti doresc tot binele din lumea asta si din toate cele care exista. Iti multumesc ca esti o prietena buna, through thick and thin! Sa ai o vacanta de vis, sa te relaxezi, sa explorezi, si cel mult sa te indragostesti de un baiat, doi, si nu de Thailanda ca I need you back❤️!"
-                <span class="sender">-- Andreea (Transmisie prioritară)</span>
-            </div>
+            <h1 id="main-title">DESTINAȚIE NECUNOSCUTĂ - Introdu codul de acces!</h1>
 
-            <div class="message-block">
-                "Teofana bomboana, esti un om minunat si cum thailandezii nu au o Teofana, speram ca vor crea amintiri minunate alaturi de tine sa le pretuiasca o viata. Sa incepi 33 with a bang (wink wink) si asteptam sa ne spui cine sta cel mai bine pe mancare vegetariana, cretanii sau thailandezii? Te iubim, one of the greatest aunties Eva will know 🤗"
-                <span class="sender">-- Madalina (Fișier Atașat)</span>
-            </div>
+            
 
-            <div class="message-block">
-                "Cumaaaa, oricat as vrea, nu as putea sa ma ridic la nivelul Andreei cand vine vorba de mesaje de la multi ani, dar pot doar sa incerc. Iti doresc sa ai parte de o aventura in care sa vizitezi asa multe locuri, sa incerci asa multe feluri de mancare si sa iti faci asa multe amintiri, incat sa iti tot aduci aminte de chestii care ti s-au intamplat si pe care o sa uiti sa ni le spui imediat cum te intorci si sa mai avem ce povesti si pana spre finalul anului. Cu mai multe urari de bine, ne mai auzim si in februarie!"
-                <span class="sender">-- Oana (Transmisie Securizată)</span>
-            </div>
+            <input type="text" id="date-password-input" class="password-input" placeholder="##.##.#### (Ex: 01.01.2025)" maxlength="10">
 
-            <div class="message-block">
-                "Teofanica noastră minunată și frumoasă, la muuuulți aaaaaani! Acest cadou vine din partea noastră ca un gest de recunoștință și bucurie că te avem în viețile noastre! Te iubesc enooooorm! Și sper să te bucuri la maxiiiiim de această experiență 🤍"
-                <span class="sender">-- Ioana (Mesaj Criptat Reușit)</span>
-            </div>
-            
-            <div class="message-block">
-                "Iti urez un 'La mulți ani' timpuriu, Teofana! Iti doresc o aventură minunată în Thailanda (is this your leaving the shire moment?) și cât mai multe bucurii de ziua ta! 🤗"
-                <span class="sender">-- Gabi (Log Recuperat)</span>
-            </div>
+            
 
-            <div class="message-block">
-                "Draga Teofanica!! Ma bucur tare mult ca reusesti sa-ti indeplinesti acest vis pentru ca meriti din plin. Sa te distrezi maxim! Si send pics!!!"
-                <span class="sender">-- Daniela (Decriptare Nivel 1)</span>
-            </div>
+            <button id="decrypt-button">DECRIPTEAZĂ</button>
 
-            <div class="message-block">
-                "Draga mea Teofanica, Sper să ai parte de experiența vieții tale în Thailanda, să fie atât de minunată încât nici nu ți-ai fi putut imagina o asemenea aventură. Meriți din plin tot ce e mai bun pe lumea asta. ❤ Să știi că, în loc de poze cu cai, aștept poze cu surferi la bustul gol pe plajă, din ăștia care merg în Thailanda să se regăsească pe ei și să-și caute scopul în viață. Și cine știe, poate iti gasesti si tu scopul in brațele unuia. Sau a doi… 😉 Love you always, Mariana"
-                <span class="sender">-- Mariana (Cod Secret Revelat)</span>
-            </div>
+            
 
-        </div>
+            <div id="error-message-date"></div>
 
-    </div>
+        </div>
 
-    <script>
-        // Setări
-        const CORRECT_DATE = '20.02.2026';
-        const CORRECT_INITIALS = 'IO';
-        const MAX_ATTEMPTS = 2;
 
-        // Variabile de stare
-        let dateAttempts = 0;
-        let initialsAttempts = 0;
-        
-        // Elemente DOM
-        const initialView = document.getElementById('initial-view');
-        const penaltyView = document.getElementById('penalty-view');
-        const successView = document.getElementById('success-view');
-        const finalMessage = document.getElementById('final-message');
-        const mainTitle = document.getElementById('main-title');
-        
-        const dateInput = document.getElementById('date-password-input');
-        const decryptButton = document.getElementById('decrypt-button');
-        const errorDate = document.getElementById('error-message-date');
 
-        const initialsInput = document.getElementById('initials-password-input');
-        const penaltyButton = document.getElementById('penalty-button');
-        const errorInitials = document.getElementById('error-message-initials');
+        <div id="penalty-view">
 
-        const nextMissionButton = document.getElementById('next-mission-button');
+             <h1 id="penalty-title">EROARE CRITICĂ! PENALIZARE ACTIVATĂ!</h1>
 
-        // Funcții
-        function showView(viewToShow) {
-            initialView.style.display = 'none';
-            penaltyView.style.display = 'none';
-            successView.style.display = 'none';
-            finalMessage.style.display = 'none';
-            viewToShow.style.display = 'block';
-            
-            // Resetăm mesajele de eroare când schimbăm view-ul
-            errorDate.style.display = 'none';
-            errorInitials.style.display = 'none';
-        }
+             <p style="color: yellow; font-size: 1.2em;">Greselile se platesc scump! Trebuie sa faci un sacrificiu pentru binele comun. Introdu initialele oamenilor cu care stai la masa acum - ai grija sa fie in ordine alfabetica.</p>
 
-        function resetInitialView() {
-            showView(initialView);
-            dateAttempts = 0; // Resetăm numărul de greșeli la 0
-            mainTitle.textContent = 'DESTINAȚIE NECUNOSCUTĂ - Introdu codul de acces!';
-            dateInput.value = '';
-            errorDate.textContent = '';
-        }
 
-        // #####################################
-        // LOGICA STĂRII 1: PAROLĂ DATA
-        // #####################################
 
-        decryptButton.addEventListener('click', function() {
-            const enteredPassword = dateInput.value.trim();
+             <input type="text" id="initials-password-input" class="password-input" placeholder="Ex: AB" maxlength="2">
 
-            if (enteredPassword === CORRECT_DATE) {
-                // Succes
-                mainTitle.textContent = 'Codul de Acces acceptat.';
-                document.querySelector('.container').style.animation = 'none'; // Oprim glitch-ul
-                showView(successView);
-                
-            } else {
-                // Eșec
-                dateAttempts++;
-                
-                if (dateAttempts >= MAX_ATTEMPTS) {
-                    // Trecem la starea de penalizare
-                    showView(penaltyView);
-                    dateInput.value = '';
-                    mainTitle.textContent = 'MISIUNE EȘUATĂ! Treci la Penalizare!';
-                    document.getElementById('penalty-title').textContent = 'EROARE CRITICĂ! PENALIZARE ACTIVATĂ!';
-                } else {
-                    // Cazul "Mai ai o incercare"
-                    mainTitle.textContent = 'DECRIPTATOR BLOCAT! Cod greșit!';
-                    errorDate.innerHTML = 'EROARE CRITICĂ. Mai ai **o singură** încercare!';
-                    errorDate.style.display = 'block';
-                    dateInput.value = ''; // Golește câmpul
-                }
-            }
-        });
+             <button id="penalty-button">SACRIFICĂ</button>
 
-        // #####################################
-        // LOGICA STĂRII 2: PAROLĂ INIȚIALE
-        // #####################################
-        
-        penaltyButton.addEventListener('click', function() {
-            const enteredInitials = initialsInput.value.trim().toUpperCase();
+             
 
-            if (enteredInitials === CORRECT_INITIALS) {
-                // Succesul penalizării (Resetează jocul)
-                alert('Sacrificiu acceptat. Ai câștigat o nouă șansă.');
-                resetInitialView();
-            } else {
-                // Eșecul penalizării (Mesajul "Fratele cel Mare")
-                initialsAttempts++;
-                errorInitials.innerHTML = 'De ce il minți pe **Fratele cel Mare**? Te las totuși să mai introduci codul încă o dată.';
-                errorInitials.style.display = 'block';
-                initialsInput.value = '';
-                
-                // După ce a văzut mesajul, resetăm la starea inițială
-                setTimeout(resetInitialView, 6000); 
-            }
-        });
+             <div id="error-message-initials"></div>
 
-        // #####################################
-        // LOGICA STĂRII DE SUCCES
-        // #####################################
+        </div>
 
-        nextMissionButton.addEventListener('click', function() {
-            // Trecem la modul final de surpriză (culori de plajă)
-            document.body.classList.add('final-mission');
-            
-            // Ascundem elementele inutile și afișăm mesajul final
-            successView.style.display = 'none';
-            mainTitle.textContent = 'FELICITĂRI! DESTINAȚIA FINALĂ REZOLVATĂ!';
-            finalMessage.style.display = 'block';
-        });
-    </script>
+
+
+        <div id="success-view" style="display:none;">
+
+            <p style="font-size: 2em; color: #ff9900;">Decriptare totală.</p>
+
+            <button id="next-mission-button">VEZI URMĂTOAREA MISIUNE</button>
+
+        </div>
+
+        
+
+        <div id="final-message" style="display:none;">
+            
+            <div class="mission-header">
+                <h2 style="margin: 0; font-size: 1.8em; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+                    🔒 MISIUNE SECRETĂ: COD 033 🔒
+                </h2>
+            </div>
+            
+            <div style="font-size: 1.15em; line-height: 1.8; margin-bottom: 25px; text-align: center; color: #2c3e50;">
+                <strong>Teofana</strong>, la aniversarea ta de <strong style="color: #e67e22;">33 de ani</strong>, ai fost selectată pentru o misiune de <strong style="color: #ff0041;">maximă importanță!</strong>
+            </div>
+            
+            <div class="mission-section">
+                <div class="mission-title">
+                    <span class="mission-icon">🎯</span>
+                    OBIECTIVUL:
+                </div>
+                <div class="mission-content">
+                    Infiltrarea în paradisul tropical cunoscut sub numele de <strong style="color: #e67e22;">Thailanda</strong>.
+                </div>
+            </div>
+            
+            <div class="mission-section">
+                <div class="mission-title">
+                    <span class="mission-icon">📋</span>
+                    INSTRUCȚIUNI:
+                </div>
+                <div class="mission-content">
+                    Pregătirile de zbor încep <span class="highlight-text">I-ME-DI-AT!</span> La aterizare, vei primi un cocktail misterios (cel mai probabil un <strong>Mai Tai</strong>), iar singurul echipament obligatoriu este un costum de baie și cremă de protecție solară (factor <strong>SF30+</strong>).
+                </div>
+            </div>
+            
+            <div class="mission-section">
+                <div class="mission-title">
+                    <span class="mission-icon">⚠️</span>
+                    ATENȚIE:
+                </div>
+                <div class="mission-content" style="color: #e74c3c; font-weight: bold;">
+                    Eșecul de a te bucura de plaje, mâncare și masaj este <strong>INACCEPTABIL</strong>.
+                </div>
+            </div>
+            
+            <div class="final-conclusion">
+                Această misiune nu este o alegere.<br>
+                <span style="font-size: 1.1em;">Este destinul tău.</span><br><br>
+                <span style="color: #ffeb3b; font-size: 1.4em;">Misiune plăcută, 033!</span> 🇹🇭
+            </div>
+            
+            <p style="color: #e67e22; font-size: 1.2em; margin: 30px 0 10px 0; text-align: center; font-weight: bold;">
+                Click pe numele prietenilor pentru a vedea mesajele lor:
+            </p>
+            
+        </div>
+        
+        <!-- Author Bubbles Container -->
+        <div class="author-bubbles-container" id="author-bubbles">
+            <!-- Bubbles will be generated by JavaScript -->
+        </div>
+
+        
+
+        <!-- Quote overlay container for grid positioning -->
+
+        <div class="quote-overlay"></div>
+
+
+
+    </div>
+
+
+
+    <script>
+
+        // Setări
+
+        const CORRECT_DATE = '20.02.1993';
+
+        const CORRECT_INITIALS = 'IO';
+
+        const MAX_ATTEMPTS = 2;
+
+        
+
+        // Quotes pentru floating messages
+
+        const QUOTES = [
+
+            {
+
+                author: "Dori:",
+
+                message: "Draga Ciolofana, Iti doresc o calatorie minunata, cu mult spf 50, cu tot ce iti ureaza Andreea and then some. Ai grija sa nu te imbolnavesti si abia astept sa primesc o carte postala de acolo dupa 2 ani de la vizita ta:)) Pupi! Pa!"
+
+            },
+
+            {
+
+                author: "Andreea:",
+
+                message: "La multi ani, prietenaaaaa meaaa cea mai bunaaa (trebuia sa precizez pentru ca Oana a strans mesajele, sa nu uite cumva) stttttttimata (si vesnic ocupata) doamna directoare...Thailand is callling...prea devreme sa fac gluma cu iti doresc fu-thai? Sau?!"
+
+            },
+
+            {
+
+                author: "Andreea:",
+
+                message: "Am decis ca ai nevoie de o vacanta, doar pentru tine, asa ca sa nu mai aud de baby sitting si sedinte si deadline-uri si CEO-ing decat daca e inceputul unui film porno, in care speeeer sa fii protagonista in fiecare seara din aceasta vacanta😏😏😏"
+
+            },
+
+            {
+
+                author: "Andreea:",
+
+                message: "Pixie e perfect capabila sa conduca compania, sa negocieze contractele, creca deja a si convocat o sedinta de pe canapea...asa ca umpleee bagajele si enjoy enjoy njoy joy oy yyy aaaa iii aaaaa aaaa uuuu aaaaa si pe plaja in apa pe barca la hotel pe langa hotel si oriunde!!!"
+
+            },
+
+            {
+
+                author: "Andreea:",
+
+                message: "Acum ca am disperat-o pe Ioana cu toate glumele sexoase (stiu ca Oana ii arata), sa trecem la lucruri serioase: te iubesc din clasa 1 (bine am exagerat, da voiam sa le aduc aminte si asta) iti doresc tot binele din lumea asta si din toate cele care exista."
+
+            },
+
+            {
+
+                author: "Andreea:",
+
+                message: "Iti multumesc ca esti o prietena buna, through thick and thin! Sa ai o vacanta de vis, sa te relaxezi, sa explorezi, si cel mult sa te indragostesti de un baiat, doi, si nu de Thailanda ca I need you back❤️!"
+
+            },
+
+            {
+
+                author: "Madalina:",
+
+                message: "Teofana bomboana, esti un om minunat si cum thailandezii nu au o Teofana, speram ca vor crea amintiri minunate alaturi de tine sa le pretuiasca o viata. Sa incepi 33 with a bang (wink wink) si asteptam sa ne spui cine sta cel mai bine pe mancare vegetariana, cretanii sau thailandezii? Te iubim, one of the greatest aunties Eva will know 🤗"
+
+            },
+
+            {
+
+                author: "Oana:",
+
+                message: "Cumaaaa, oricat as vrea, nu as putea sa ma ridic la nivelul Andreei cand vine vorba de mesaje de la multi ani, dar pot doar sa incerc."
+
+            },
+
+            {
+
+                author: "Oana:",
+
+                message: "Iti doresc sa ai parte de o aventura in care sa vizitezi asa multe locuri, sa incerci asa multe feluri de mancare si sa iti faci asa multe amintiri, incat sa iti tot aduci aminte de chestii care ti s-au intamplat si pe care o sa uiti sa ni le spui imediat cum te intorci si sa mai avem ce povesti si pana spre finalul anului."
+
+            },
+
+            {
+
+                author: "Oana:",
+
+                message: "Cu mai multe urari de bine, ne mai auzim si in februarie!"
+
+            },
+
+            {
+
+                author: "Ioana:",
+
+                message: "Teofanica noastră minunată și frumoasă, la muuuulții aaaaaani! Acest cadou vine din partea noastră ca un gest de recunoștință și bucurie că te avem în viețile noastre! Te iubesc enooooorm! Și sper să te bucuri la maxiiiiim de această experiență 🤍"
+
+            },
+
+            {
+
+                author: "Gabi:",
+
+                message: "Iti urez un 'La mulți ani' timpuriu, Teofana! Iti doresc o aventură minunată în Thailanda (is this your leaving the shire moment?) și cât mai multe bucurii de ziua ta! 🤗"
+
+            },
+
+            {
+
+                author: "Daniela:",
+
+                message: "Draga Teofanica!! Ma bucur tare mult ca reusesti sa-ti indeplinesti acest vis pentru ca meriti din plin. Sa te distrezi maxim! Si send pics!!!"
+
+            },
+
+            {
+
+                author: "Mariana:",
+
+                message: "Draga mea Teofanica, Sper să ai parte de experiența vieții tale în Thailanda, să fie atât de minunată încât nici nu ți-ai fi putut imagina o asemenea aventură. Meriți din plin tot ce e mai bun pe lumea asta. ❤"
+
+            },
+
+            {
+
+                author: "Mariana:",
+
+                message: "Să știi că, în loc de poze cu cai, aștept poze cu surferi la bustul gol pe plajă, din ăștia care merg în Thailanda să se regăsească pe ei și să-și caute scopul în viață. Și cine știe, poate iti gasesti si tu scopul in brațele unuia. Sau a doi… 😉 Love you always, Mariana"
+
+            }
+
+        ];
+
+
+
+        // Variabile de stare
+
+        let dateAttempts = 0;
+
+        let initialsAttempts = 0;
+
+        
+
+        // Elemente DOM
+
+        const initialView = document.getElementById('initial-view');
+
+        const penaltyView = document.getElementById('penalty-view');
+
+        const successView = document.getElementById('success-view');
+
+        const finalMessage = document.getElementById('final-message');
+
+        const mainTitle = document.getElementById('main-title');
+
+        
+
+        const dateInput = document.getElementById('date-password-input');
+
+        const decryptButton = document.getElementById('decrypt-button');
+
+        const errorDate = document.getElementById('error-message-date');
+
+
+
+        const initialsInput = document.getElementById('initials-password-input');
+
+        const penaltyButton = document.getElementById('penalty-button');
+
+        const errorInitials = document.getElementById('error-message-initials');
+
+
+
+        const nextMissionButton = document.getElementById('next-mission-button');
+
+        // Author bubbles system initialized
+
+
+
+        // Funcții
+
+        function showView(viewToShow) {
+
+            initialView.style.display = 'none';
+
+            penaltyView.style.display = 'none';
+
+            successView.style.display = 'none';
+
+            finalMessage.style.display = 'none';
+
+            viewToShow.style.display = 'block';
+
+            
+
+            // Resetăm mesajele de eroare când schimbăm view-ul
+
+            errorDate.style.display = 'none';
+
+            errorInitials.style.display = 'none';
+
+        }
+
+
+
+        function resetInitialView() {
+
+            showView(initialView);
+
+            dateAttempts = 0; // Resetăm numărul de greșeli la 0
+
+            mainTitle.textContent = 'DESTINAȚIE NECUNOSCUTĂ - Introdu codul de acces!';
+
+            dateInput.value = '';
+
+            errorDate.textContent = '';
+
+        }
+
+        
+
+        // Author Bubbles System
+        let activeMessages = [];
+        let bubblePositions = [
+            { x: 15, y: 20 }, { x: 85, y: 25 }, { x: 50, y: 15 },
+            { x: 20, y: 70 }, { x: 80, y: 75 }, { x: 45, y: 85 },
+            { x: 10, y: 45 }, { x: 90, y: 50 }
+        ];
+        
+        // Get unique authors from QUOTES
+        function getUniqueAuthors() {
+            const authors = [...new Set(QUOTES.map(q => q.author.replace(':', '')))];
+            return authors;
+        }
+        
+        // Create author bubbles
+        function createAuthorBubbles() {
+            const container = document.getElementById('author-bubbles');
+            const authors = getUniqueAuthors();
+            
+            authors.forEach((author, index) => {
+                setTimeout(() => {
+                    const bubble = document.createElement('div');
+                    bubble.className = 'author-bubble';
+                    bubble.textContent = author;
+                    bubble.style.animationDelay = `${index * 0.2}s`;
+                    
+                    // Position bubble
+                    const pos = bubblePositions[index % bubblePositions.length];
+                    bubble.style.left = pos.x + '%';
+                    bubble.style.top = pos.y + '%';
+                    
+                    // Add click handler
+                    bubble.addEventListener('click', () => showAuthorMessages(author));
+                    
+                    container.appendChild(bubble);
+                }, index * 200);
+            });
+        }
+        
+        // Show messages for specific author
+        function showAuthorMessages(authorName) {
+            // Clear existing messages
+            clearActiveMessages();
+            
+            // Find messages from this author
+            const authorMessages = QUOTES.filter(q => q.author.replace(':', '') === authorName);
+            
+            // Create floating messages
+            authorMessages.forEach((quote, index) => {
+                setTimeout(() => {
+                    createFloatingMessage(quote, index);
+                }, index * 800);
+            });
+        }
+        
+        // Create floating message
+        function createFloatingMessage(quote, index) {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'floating-message';
+            
+            const authorDiv = document.createElement('div');
+            authorDiv.className = 'message-author';
+            authorDiv.textContent = quote.author.replace(':', '');
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.textContent = quote.message;
+            
+            messageElement.appendChild(authorDiv);
+            messageElement.appendChild(contentDiv);
+            
+            // Smart positioning
+            const position = findGoodMessagePosition();
+            messageElement.style.left = position.x + 'px';
+            messageElement.style.top = position.y + 'px';
+            
+            // Add to page
+            document.body.appendChild(messageElement);
+            activeMessages.push({
+                element: messageElement,
+                x: position.x,
+                y: position.y
+            });
+            
+            // Auto remove after 15 seconds
+            setTimeout(() => {
+                removeMessage(messageElement);
+            }, 15000);
+        }
+        
+        // Smart positioning for messages
+        function findGoodMessagePosition() {
+            const margin = 20;
+            const messageWidth = 280;
+            const messageHeight = 120;
+            
+            for (let attempt = 0; attempt < 20; attempt++) {
+                const x = margin + Math.random() * (window.innerWidth - messageWidth - margin * 2);
+                const y = margin + Math.random() * (window.innerHeight - messageHeight - margin * 2);
+                
+                // Check if position is clear
+                let isGood = true;
+                for (let existing of activeMessages) {
+                    const distance = Math.sqrt(Math.pow(x - existing.x, 2) + Math.pow(y - existing.y, 2));
+                    if (distance < 180) {
+                        isGood = false;
+                        break;
+                    }
+                }
+                
+                if (isGood) return { x, y };
+            }
+            
+            // Fallback
+            return {
+                x: margin + Math.random() * (window.innerWidth - messageWidth - margin * 2),
+                y: margin + Math.random() * (window.innerHeight - messageHeight - margin * 2)
+            };
+        }
+        
+        // Remove message with animation
+        function removeMessage(messageElement) {
+            messageElement.style.transition = 'all 0.8s ease-out';
+            messageElement.style.opacity = '0';
+            messageElement.style.transform = 'translateY(-30px) scale(0.8)';
+            
+            setTimeout(() => {
+                if (messageElement.parentNode) {
+                    messageElement.parentNode.removeChild(messageElement);
+                    activeMessages = activeMessages.filter(m => m.element !== messageElement);
+                }
+            }, 800);
+        }
+        
+        // Clear all active messages
+        function clearActiveMessages() {
+            activeMessages.forEach(msg => {
+                if (msg.element.parentNode) {
+                    removeMessage(msg.element);
+                }
+            });
+        }
+
+        // Legacy function - now redirects to bubble system
+        function createFloatingQuote(quote, delay) {
+            // This function is kept for compatibility but no longer used
+            // The new system uses author bubbles instead
+            return;
+        }
+
+        
+
+        // Funcție pentru afișarea tuturor quote-urilor
+
+        function showFloatingQuotes() {
+
+            QUOTES.forEach((quote, index) => {
+
+                createFloatingQuote(quote, index * 1000); // 1 secundă între fiecare quote
+
+            });
+
+        }
+
+        
+
+        // Funcție pentru afișarea unui quote aleatoriu
+
+        function showRandomQuote() {
+
+            const randomQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+
+            createFloatingQuote(randomQuote, 0);
+
+        }
+
+        
+
+        // Funcție pentru afișarea mai multor quote-uri aleatorii
+
+        function showMoreRandomQuotes() {
+
+            const numQuotes = Math.floor(Math.random() * 4) + 2; // 2-5 quote-uri
+
+            for (let i = 0; i < numQuotes; i++) {
+
+                setTimeout(() => {
+
+                    showRandomQuote();
+
+                }, i * 800); // 0.8 secunde între fiecare
+
+            }
+
+        }
+
+
+
+        // #####################################
+
+        // LOGICA STĂRII 1: PAROLĂ DATA
+
+        // #####################################
+
+
+
+        decryptButton.addEventListener('click', function() {
+
+            const enteredPassword = dateInput.value.trim();
+
+
+
+            if (enteredPassword === CORRECT_DATE) {
+
+                // Succes
+
+                mainTitle.textContent = 'Codul de Acces acceptat.';
+
+                document.querySelector('.container').style.animation = 'none'; // Oprim glitch-ul
+
+                showView(successView);
+
+                
+
+            } else {
+
+                // Eșec
+
+                dateAttempts++;
+
+                
+
+                if (dateAttempts >= MAX_ATTEMPTS) {
+
+                    // Trecem la starea de penalizare
+
+                    showView(penaltyView);
+
+                    dateInput.value = '';
+
+                    mainTitle.textContent = 'MISIUNE EȘUATĂ! Treci la Penalizare!';
+
+                    document.getElementById('penalty-title').textContent = 'EROARE CRITICĂ! PENALIZARE ACTIVATĂ!';
+
+                } else {
+
+                    // Cazul "Mai ai o incercare"
+
+                    mainTitle.textContent = 'DECRIPTATOR BLOCAT! Cod greșit!';
+
+                    errorDate.innerHTML = 'EROARE CRITICĂ. Mai ai **o singură** încercare!';
+
+                    errorDate.style.display = 'block';
+
+                    dateInput.value = ''; // Golește câmpul
+
+                }
+
+            }
+
+        });
+
+
+
+        // #####################################
+
+        // LOGICA STĂRII 2: PAROLĂ INIȚIALE
+
+        // #####################################
+
+        
+
+        penaltyButton.addEventListener('click', function() {
+
+            const enteredInitials = initialsInput.value.trim().toUpperCase();
+
+
+
+            if (enteredInitials === CORRECT_INITIALS) {
+
+                // Succesul penalizării (Resetează jocul)
+
+                alert('Sacrificiu acceptat. Ai câștigat o nouă șansă.');
+
+                resetInitialView();
+
+            } else {
+
+                // Eșecul penalizării (Mesajul "Fratele cel Mare")
+
+                initialsAttempts++;
+
+                errorInitials.innerHTML = 'De ce il minți pe **Fratele cel Mare**? Te las totuși să mai introduci codul încă o dată.';
+
+                errorInitials.style.display = 'block';
+
+                initialsInput.value = '';
+
+                
+
+                // După ce a văzut mesajul, resetăm la starea inițială
+
+                setTimeout(resetInitialView, 6000); 
+
+            }
+
+        });
+
+
+
+        // #####################################
+
+        // LOGICA STĂRII DE SUCCES
+
+        // #####################################
+
+
+
+        nextMissionButton.addEventListener('click', function() {
+
+            // Trecem la modul final de surpriză (culori de plajă)
+
+            document.body.classList.add('final-mission');
+
+            
+
+            // Ascundem elementele inutile și afișăm mesajul final
+
+            successView.style.display = 'none';
+
+            mainTitle.textContent = 'FELICITĂRI! DESTINAȚIA FINALĂ REZOLVATĂ!';
+
+            finalMessage.style.display = 'block';
+
+            
+
+            // Afișăm bubble-urile cu numele prietenilor după 2 secunde
+
+            setTimeout(() => {
+
+                createAuthorBubbles();
+
+            }, 2000);
+
+        });
+
+        
+
+        // Author bubbles system is ready!
+
+    </script>
+
+
 
 </body>
+
 </html>
